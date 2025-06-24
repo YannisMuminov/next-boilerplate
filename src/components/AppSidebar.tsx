@@ -8,6 +8,7 @@ import {
     SidebarGroupContent,
     SidebarHeader,
     SidebarMenu,
+    SidebarMenuBadge,
     SidebarMenuButton,
     SidebarMenuItem,
 } from "@/components/ui/sidebar"
@@ -16,7 +17,6 @@ import {
     DropdownMenuContent,
     DropdownMenuGroup,
     DropdownMenuItem,
-    DropdownMenuLabel,
     DropdownMenuPortal,
     DropdownMenuSeparator,
     DropdownMenuShortcut,
@@ -32,12 +32,12 @@ import Image from "next/image"
 const items = [
     {
         title: "Home",
-        url: "#",
+        url: "/home",
         icon: Home,
     },
     {
         title: "Inbox",
-        url: "#",
+        url: "/",
         icon: Inbox,
     },
     {
@@ -59,12 +59,12 @@ const items = [
 
 export default function AppSidebar() {
     return (
-        <Sidebar>
+        <Sidebar collapsible="icon" className="w-64" variant="floating">
             <SidebarHeader>
                 <SidebarMenu>
                     <SidebarMenuItem>
-                        <SidebarMenuButton asChild>
-                            <Link href="/">
+                        <SidebarMenuButton asChild className="border-b-2">
+                            <Link href="/" className="pt-2">
                                 <Image
                                     src="https://github.com/shadcn.png"
                                     alt="shadcn"
@@ -72,7 +72,7 @@ export default function AppSidebar() {
                                     height={30}
                                     className="rounded-full"
                                 />
-                                <span className="text-md font-medium">MM Dev</span>
+                                <span className="text-md font-medium">Yannis Dev</span>
                             </Link>
                         </SidebarMenuButton>
                     </SidebarMenuItem>
@@ -86,10 +86,15 @@ export default function AppSidebar() {
                                 <SidebarMenuItem key={item.title}>
                                     <SidebarMenuButton asChild>
                                         <Link href={item.url}>
-                                            <item.icon />
+                                            <item.icon width={32} height={32} />
                                             <span>{item.title}</span>
                                         </Link>
                                     </SidebarMenuButton>
+                                    {item.title === "Inbox" && (
+                                        <SidebarMenuBadge>
+                                            25
+                                        </SidebarMenuBadge>
+                                    )}
                                 </SidebarMenuItem>
                             ))}
                         </SidebarMenu>
@@ -108,7 +113,6 @@ export default function AppSidebar() {
                                 </SidebarMenuButton>
                             </DropdownMenuTrigger>
                             <DropdownMenuContent className="w-56" align="start">
-                                <DropdownMenuLabel>My Account</DropdownMenuLabel>
                                 <DropdownMenuGroup>
                                     <DropdownMenuItem>
                                         Profile
